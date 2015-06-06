@@ -4,6 +4,7 @@ package com.icedex.lolmon.testapp;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Slide;
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Intent intent = new Intent(this, SettingsActivity.class);
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
