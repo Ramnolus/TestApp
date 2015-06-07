@@ -2,5 +2,7 @@
     <!-- opens a subscreen of settings -->
     <PreferenceCategory
         android:key="pref_key_storage_settings"
-        android:title="@string/settings_category1"></PreferenceCategory>
+        android:title="@string/settings_category1">
+
+    </PreferenceCategory>
 </PreferenceScreen>
