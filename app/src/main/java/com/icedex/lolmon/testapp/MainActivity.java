@@ -29,18 +29,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        decorView.setSystemUiVisibility(uiOptions);
+
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(getResources().getColor(R.color.primary_dark));
-
+        window.setNavigationBarColor(getResources().getColor(R.color.transparent));
     }
 
     private void onAttach() {
 
-        Snackbar
-                .make(this.findViewById(android.R.id.content), R.string.toast_notext, Snackbar.LENGTH_LONG)
-                .show();
+        Snackbar snackbar = Snackbar.make(this.findViewById(android.R.id.content), R.string.snackbar_notext, Snackbar.LENGTH_LONG);
+        View snackBarView = snackbar.getView();
+        snackBarView.setBackgroundColor(getResources().getColor(R.color.primary));
+        snackbar.show();
+
     }
 
 

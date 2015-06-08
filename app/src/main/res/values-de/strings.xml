@@ -7,7 +7,7 @@
     <string name="action_settings">Einstellungen</string>
     <string name="action_search">Suchen</string>
     <string name="title_activity_display_message">Meine Nachricht</string>
-    <string name="toast_notext">Bitte Text eingeben</string>
+    <string name="snackbar_notext">Bitte Text eingeben</string>
     <string name="settings_category1">Display</string>
     <string name="title_settings_activity">Settings</string>
 
