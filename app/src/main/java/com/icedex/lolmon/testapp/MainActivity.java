@@ -5,7 +5,9 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.transition.Slide;
 import android.view.Gravity;
 import android.view.Menu;
@@ -28,16 +30,24 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-        decorView.setSystemUiVisibility(uiOptions);
+        setupToolbar();
 
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(getResources().getColor(R.color.primary_dark));
         window.setNavigationBarColor(getResources().getColor(R.color.transparent));
+    }
+
+    private void setupToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+        }
+        final ActionBar ab = getSupportActionBar();
+        ab.setTitle(R.string.app_name);
+        ab.setHomeAsUpIndicator(R.drawable.ic_menu_black);
+        ab.setDisplayHomeAsUpEnabled(true);
     }
 
     private void onAttach() {
@@ -48,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         snackbar.show();
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
 
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

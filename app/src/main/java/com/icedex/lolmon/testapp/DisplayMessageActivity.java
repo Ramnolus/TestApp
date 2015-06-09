@@ -1,14 +1,16 @@
 package com.icedex.lolmon.testapp;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.transition.Slide;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -22,10 +24,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-        decorView.setSystemUiVisibility(uiOptions);
-
         //Get the message from the intent
         final Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
@@ -38,11 +36,19 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         //set the text view as the activity layout
         setContentView(R.layout.activity_display_message);
+        setupToolbar();
 
         //Create the text view
         TextView textView = (TextView) findViewById(R.id.text_view1);
         textView.setTextSize(20);
         textView.setText(message);
+    }
+
+    private void setupToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        final ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -55,10 +61,14 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
-            return true;
+        Intent intent = new Intent(this, SettingsActivity.class);
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.action_settings:
+                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+                return true;
         }
-        return false;
+        return super.onMenuItemSelected(id, item);
     }
     }

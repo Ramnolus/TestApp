@@ -1,5 +1,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- opens a subscreen of settings -->
+
     <PreferenceCategory
         android:key="pref_key_storage_settings"
         android:title="@string/settings_category1">
