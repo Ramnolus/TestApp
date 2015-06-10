@@ -7,5 +7,4 @@
     android:background="@color/primary"
     android:minHeight="@dimen/toolbar_height"
     app:navigationIcon="?attr/homeAsUpIndicator"
-    app:theme="@style/ThemeOverlay.AppCompat.Light"
     app:title="@string/action_settings" />

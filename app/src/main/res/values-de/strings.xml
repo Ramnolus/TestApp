@@ -10,5 +10,8 @@
     <string name="snackbar_notext">Bitte Text eingeben</string>
     <string name="settings_category1">Display</string>
     <string name="title_settings_activity">Settings</string>
+    <string name="open">öffnen</string>
+    <string name="close">schließen</string>
+    <string name="nav_header_text">TestApp</string>
 
 </resources>

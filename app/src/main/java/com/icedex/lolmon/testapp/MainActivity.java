@@ -4,14 +4,17 @@ package com.icedex.lolmon.testapp;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.transition.Slide;
 import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -22,6 +25,9 @@ import android.widget.EditText;
 public class MainActivity extends AppCompatActivity {
 
     public final static String EXTRA_MESSAGE = "com.icedex.lolmon.testapp.MESSAGE";
+    private NavigationView navigationView;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setupNavigationView();
         setupToolbar();
 
         Window window = getWindow();
@@ -39,6 +46,50 @@ public class MainActivity extends AppCompatActivity {
         window.setNavigationBarColor(getResources().getColor(R.color.transparent));
     }
 
+    private void setupNavigationView() {
+        navigationView = (NavigationView) findViewById(R.id.navigation);
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
+            public boolean onNavigationItemSelected(MenuItem item) {
+                item.setChecked(true);
+
+                drawerLayout.closeDrawers();
+
+                switch (item.getItemId()) {
+                    case R.id.navigation_item_settings:
+                        startSettings();
+                        return true;
+                }
+                return true;
+            }
+        });
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close) {
+
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+        };
+
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+
+        actionBarDrawerToggle.syncState();
+
+    }
+
+    private void startSettings() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+    }
+
+
     private void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
@@ -46,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
         }
         final ActionBar ab = getSupportActionBar();
         ab.setTitle(R.string.app_name);
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu_black);
         ab.setDisplayHomeAsUpEnabled(true);
     }
 
@@ -61,8 +111,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_activity_actions, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -82,14 +130,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent = new Intent(this, SettingsActivity.class);
         int id = item.getItemId();
 
-        switch (id) {
-            case R.id.action_settings:
-                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-                return true;
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            drawerLayout.openDrawer(GravityCompat.START);
+            return true;
         }
-        return super.onMenuItemSelected(id, item);
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
