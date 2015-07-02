@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 
 import com.icedex.lolmon.testapp.MainActivity;
 
-public class guidefragment4 extends Fragment {
+public class guidefragment_4 extends Fragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

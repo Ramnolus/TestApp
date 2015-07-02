@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.icedex.lolmon.testapp.R;
 
-public class guidefragment2 extends Fragment {
+public class guidefragment_3 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

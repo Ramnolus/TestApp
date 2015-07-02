@@ -6,9 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.icedex.lolmon.testapp.FirstStart.Fragments.Fragmentcontrol;
-import com.icedex.lolmon.testapp.FirstStart.Fragments.guidefragment2;
-import com.icedex.lolmon.testapp.FirstStart.Fragments.guidefragment3;
-import com.icedex.lolmon.testapp.FirstStart.Fragments.guidefragment4;
+import com.icedex.lolmon.testapp.FirstStart.Fragments.guidefragment_2;
+import com.icedex.lolmon.testapp.FirstStart.Fragments.guidefragment_3;
+import com.icedex.lolmon.testapp.FirstStart.Fragments.guidefragment_4;
 
 public class FragmentPageAdapter extends FragmentPagerAdapter {
 
@@ -28,11 +28,11 @@ public class FragmentPageAdapter extends FragmentPagerAdapter {
                 guideFragment1.setArguments(data);
                 return guideFragment1;
             case 1:
-                return new guidefragment2();
+                return new guidefragment_2();
             case 2:
-                return new guidefragment3();
+                return new guidefragment_3();
             case 3:
-                return new guidefragment4();
+                return new guidefragment_4();
             default:
                 return null;
         }
