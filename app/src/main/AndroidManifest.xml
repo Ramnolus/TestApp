@@ -26,6 +26,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".FirstStart.FirstStartActivity"
+            android:label="@string/title_activity_first_start"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.icedex.lolmon.testapp.MainActivity" />
+        </activity>
+        <activity
             android:name=".DisplayMessageActivity"
             android:label="@string/title_activity_display_message"
             android:parentActivityName=".MainActivity">

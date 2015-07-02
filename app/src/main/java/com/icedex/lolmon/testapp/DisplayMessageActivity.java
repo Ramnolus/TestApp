@@ -47,6 +47,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
+        assert ab != null;
         ab.setDisplayHomeAsUpEnabled(true);
     }
 
@@ -68,4 +69,4 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
         return super.onMenuItemSelected(id, item);
     }
-    }
+}

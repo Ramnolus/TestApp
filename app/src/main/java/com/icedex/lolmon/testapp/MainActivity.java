@@ -3,6 +3,7 @@ package com.icedex.lolmon.testapp;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -21,6 +22,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 
+import com.icedex.lolmon.testapp.FirstStart.FirstStartActivity;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setExitTransition(new Slide(Gravity.START).setDuration(300));
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         setupNavigationView();
         setupToolbar();
@@ -44,6 +48,25 @@ public class MainActivity extends AppCompatActivity {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(getResources().getColor(R.color.primary_dark));
         window.setNavigationBarColor(getResources().getColor(R.color.transparent));
+    }
+
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences preferences = getSharedPreferences("FirstStartActivityPreferences", 0);
+        boolean previouslyStarted = preferences.getBoolean("previous_start", false);
+        if (!previouslyStarted) {
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("previous_start", true);
+            editor.apply();
+            showHelp();
+        }
+
+    }
+
+    private void showHelp() {
+        Intent intent = new Intent(this, FirstStartActivity.class);
+        startActivity(intent);
     }
 
     private void setupNavigationView() {
@@ -96,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
         }
         final ActionBar ab = getSupportActionBar();
+        assert getSupportActionBar() != null;
         ab.setTitle(R.string.app_name);
         ab.setDisplayHomeAsUpEnabled(true);
     }
@@ -136,10 +160,7 @@ public class MainActivity extends AppCompatActivity {
             drawerLayout.openDrawer(GravityCompat.START);
             return true;
         }
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        return id == R.id.action_settings || super.onOptionsItemSelected(item);
 
-        return super.onOptionsItemSelected(item);
     }
 }

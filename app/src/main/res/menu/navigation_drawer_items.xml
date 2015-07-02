@@ -12,4 +12,5 @@
             android:id="@+id/navigation_item_settings"
             android:title="Settings" />
     </group>
+
 </menu>
